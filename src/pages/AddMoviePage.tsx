@@ -1,10 +1,13 @@
 import { type FormEvent, useState } from "react";
 import { useCreateMovieMutation } from "../services/moviesApi";
+import {useNavigate} from "react-router-dom";
 
 
 export default function AddMoviePage() {
     const [form, setForm] = useState({ title: "", description: "" });
     const [createMovie, { isLoading, isError, error, isSuccess, data }] = useCreateMovieMutation();
+
+    const navigate = useNavigate();
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -18,16 +21,21 @@ export default function AddMoviePage() {
 
         try {
             await createMovie({ title, description }).unwrap();
-            alert("Movie created successfully!");
         } catch (err: any) {
-            const msg = err?.data?.message || "Failed to create movie";
-            alert(msg);
+            console.log(err?.data?.message || "Failed to create movie");
         }
     };
 
     return (
         <section className="section">
-            <div className="container" style={{ maxWidth: 640 }}>
+            <button
+                className="button is-light"
+                onClick={() => navigate("/")}
+                style={{position: "absolute", top: "1.5rem", left: "1.5rem"}}
+            >
+                ← Back
+            </button>
+            <div className="container" style={{maxWidth: 640}}>
                 <h1 className="title">+ Add movie</h1>
 
                 <form className="box" onSubmit={onSubmit}>
@@ -37,7 +45,7 @@ export default function AddMoviePage() {
                             <input
                                 className="input"
                                 value={form.title}
-                                onChange={(e) => setForm((s) => ({ ...s, title: e.target.value }))}
+                                onChange={(e) => setForm((s) => ({...s, title: e.target.value}))}
                                 required
                                 maxLength={200}
                             />
@@ -50,7 +58,7 @@ export default function AddMoviePage() {
               <textarea
                   className="textarea"
                   value={form.description}
-                  onChange={(e) => setForm((s) => ({ ...s, description: e.target.value }))}
+                  onChange={(e) => setForm((s) => ({...s, description: e.target.value}))}
                   rows={5}
                   maxLength={2000}
               />

@@ -1,7 +1,9 @@
 import { type FormEvent, useState } from "react";
 import { useLoginMutation } from "../services/authApi";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({ username: "", password: "" });
     const [login, { isLoading, isError, error }] = useLoginMutation();
 
@@ -22,7 +24,14 @@ export default function LoginPage() {
     };
 
     return (
-        <section className="section">
+        <section className="section" style={{ width: "100vw", height: "100vh" }}>
+            <button 
+                className="button is-light" 
+                onClick={() => navigate("/")}
+                style={{ position: "absolute", top: "1.5rem", left: "1.5rem" }}
+            >
+                ← Back
+            </button>
             <div className="container" style={{ maxWidth: 480 }}>
                 <h1 className="title has-text-centered">Welcome back</h1>
 

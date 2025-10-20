@@ -4,6 +4,7 @@ import { Routes } from "react-router";
 import LoginPage from "./pages/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import AddMoviePage from "./pages/AddMoviePage.tsx";
+import "./App.css";
 
 export default function App() {
     return (

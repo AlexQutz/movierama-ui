@@ -2,12 +2,12 @@ version: "3.9"
 
 services:
   frontend:
-    image: movierama-ui:latest
     build:
       context: .
       dockerfile: Dockerfile
       args:
         VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
+    image: movierama-ui:latest
     ports:
       - "3000:80"
     restart: unless-stopped

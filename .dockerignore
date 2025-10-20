@@ -7,4 +7,5 @@ dist
 npm-debug.log
 Dockerfile
 docker-compose.yml
+docker-compose.dev.yml
 docker/

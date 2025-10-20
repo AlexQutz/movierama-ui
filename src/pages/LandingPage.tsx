@@ -59,14 +59,14 @@ export default function LandingPage() {
     const onReact = async (movieId: number, action: "LIKE" | "HATE" | "RETRACT") => {
         try {
             await reactToMovie({ movieId, reaction: action }).unwrap();
-            // refetch whichever list is active
+
             if (usingUser) {
                 await refetchUser();
             } else {
                 await refetchAll();
             }
         } catch (err: any) {
-            // 401 (not logged in) or validation error
+            console.log(err);
             const msg =
                 err?.status === 401
                     ? "Please log in to react."
